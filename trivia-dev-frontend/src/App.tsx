@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import Game from './pages/Game';
 
 const App: React.FC = () => {
   useEffect(() => {
@@ -7,7 +8,7 @@ const App: React.FC = () => {
 
   return (
     <div>
-      {/* Conteúdo da sua aplicação */}
+      <Game />
     </div>
   );
 };
