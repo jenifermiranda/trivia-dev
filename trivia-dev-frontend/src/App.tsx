@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import Game from './pages/Game';
+import Login from './pages/Login';
 
 const App: React.FC = () => {
   useEffect(() => {
@@ -9,6 +10,8 @@ const App: React.FC = () => {
   return (
     <div>
       <Game />
+      {/* Conteúdo da sua aplicação */}
+      <Login/>
     </div>
   );
 };
