@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Game from './pages/Game';
-import Login from './pages/Login';
+import Login from './pages/login';
 
 const App: React.FC = () => {
   useEffect(() => {
