@@ -77,23 +77,16 @@ function Game() {
 
   // randomiza questoes
   function shuffleArray<T>(array: T[]) {
-    array.sort(() => {
+    const shuffleOptions = array.sort(() => {
       const NEGATIVE_NUM = -1;
       return Math.random() + Math.random() * NEGATIVE_NUM;
     });
     // retorna o msm array embaralhado
+    return shuffleOptions;
   }
 
   // atualiza questao
-  // const getActualQuestion = (questions: Question[]) => {
-  //   const actualQuestion = questions[questionIndex];
-  //   const randomOptions = getRandomOptions(actualQuestion);
-  //   setActualQuestion(actualQuestion);
-  //   setRandomOptions(randomOptions);
-  //   // timer();
-  // };
-
-  function getActualQuestion(questions: Question[]) {
+  const getActualQuestion = (questions: Question[]) => {
     const actualQuestion = questions[questionIndex];
     const randomOptions = getRandomOptions(actualQuestion);
     setActualQuestion(actualQuestion);
@@ -101,9 +94,17 @@ function Game() {
     // timer();
   };
 
+  // function getActualQuestion(questions: Question[]) {
+  //   const actualQuestion = questions[questionIndex];
+  //   const randomOptions = getRandomOptions(actualQuestion);
+  //   setActualQuestion(actualQuestion);
+  //   setRandomOptions(randomOptions);
+  //   // timer();
+  // };
+
   // retorna as questoes certas e erradas
-  const getRandomOptions = (question: Question) => {
-    const options = [
+  const getRandomOptions = (question: Question): Options[] => {
+    const options: Options[] = [
       {
         answer: 'right',
         level: question.difficulty,
@@ -116,6 +117,7 @@ function Game() {
       })),
     ];
     // retornando [{...}, {...}, {...}]
+    
     return shuffleArray(options);
   };
 
