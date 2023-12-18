@@ -14,14 +14,17 @@ interface Question {
 
 interface Options {
   answer: string;
-  level: string;
+  level: Level;
   value: string;
 }
 
 interface Answer {
   answer: string;
-  level: string;
+  level: Level;
+  value: string;
 }
+
+type Level = 'easy' | 'medium' | 'hard';
 
 interface Props {
   dispatch: (action: any) => void; // Substitua 'any' pelo tipo real da ação
@@ -60,7 +63,7 @@ function Game() {
 //     const second = 10000;
 
 //     const time = setInterval(() => {
-//       setCounter((prevCounter) => (prevCounter > 0 ? prevCounter -1 : 0));
+//       setCounter((prevCounter) => (prevCounter > 0 ? prevCounter - 1 : 0));
 
 //       setAllAnswers((prevAllAnswers) => {
 //         if (counter === 0 || showAnswer) {
@@ -107,12 +110,12 @@ function Game() {
     const options: Options[] = [
       {
         answer: 'right',
-        level: question.difficulty,
+        level: question.difficulty as Level,
         value: question.correct_answer,
       },
       ...question.incorrect_answers.map((answer) => ({
         answer: 'wrong',
-        level: question.difficulty,
+        level: question.difficulty as Level,
         value: answer,
       })),
     ];
@@ -122,31 +125,27 @@ function Game() {
   };
 
   // atualiza a pontuacao
-  // const updateScore = (answer: Answer) => {
-  //   if (answer.answer === 'right') {
-  //     const points = 10;
-  //     const level = { easy: 1, medium: 2, hard: 3 };
-  //     const score = points + counter * level[answer.level];
-  //     console.log(score);
-  //     dispatch(updateScore(score));
-  //   }
-  //   setShowAnswer(true);
-  // };
+  const updateScore = (answer: Answer) => {
+    if (answer.answer === 'right') {
+      const points = 10;
+      const level: Record<Level, number> = { easy: 1, medium: 2, hard: 3 };
+      const score = points + counter * Number(level[answer.level]);
+      console.log(score);
+      // dispatch(updateScore(score));
+    }
+    setShowAnswer(true);
+  };
 
   // funcao do botao PROXIMO
-  // const handleClick = () => {
-  //   setActualQuestion(true);
-  //   setQuestionIndex((prevQuestionIndex) => prevQuestionIndex + 1);
-  //   setShowAnswer(false);
-  //   setAllAnswers(false);
-  //   setCounter(10);
+  const handleClick = () => {
+    // setActualQuestion(true);
+    setQuestionIndex(questionIndex + 1);
+    setShowAnswer(false);
+    setAllAnswers(false);
+    setCounter(10);
 
-  //   getActualQuestion();
-  // }
-
-  // Checa carregamento da página
-  // if (redirect) return <Redirect to="/" />;
-  // criar componente Redirect para redirecionar a pagina
+    getActualQuestion(questions);
+  }
 
   return (
     <section>
@@ -156,10 +155,34 @@ function Game() {
         {' '}
         {counter}
       </h2>
-      { }
-        <h2>Categoria</h2>
-        <h3>Questão</h3>
-        <button>
+      {actualQuestion && (
+        <div>
+          <h2>{actualQuestion.category}</h2>
+          <h3>{actualQuestion.difficulty}</h3>
+          <h3>{actualQuestion.question}</h3>
+          <div>
+            {randomOptions && randomOptions.map((option, index) => {
+              const isRight = option.answer === 'right';
+              const color = showAnswer
+                ? isRight ? 'green' : 'red'
+                : 'white';
+              return (
+                <button
+                  key={index}
+                  onClick={() => updateScore(option)}
+                  style={{ backgroundColor: color }}
+                  disabled={allAnswers}
+                >
+                  {option.value}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+        <button
+        onClick={handleClick}
+        >
           Próxima
         </button>
     </section>
