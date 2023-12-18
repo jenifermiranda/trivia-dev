@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import Game from './pages/Game';
-import Login from './pages/login';
+import Login from './pages/Login';
 
 const App: React.FC = () => {
   useEffect(() => {
@@ -8,11 +9,10 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <div>
-      <Game />
-      {/* Conteúdo da sua aplicação */}
-      <Login/>
-    </div>
+    <Routes>
+      <Route path="/" element={ <Login /> } />
+      <Route path="/game" element={ <Game /> } />
+    </Routes>
   );
 };
 
