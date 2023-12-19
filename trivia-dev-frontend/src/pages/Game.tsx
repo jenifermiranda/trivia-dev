@@ -58,25 +58,25 @@ function Game() {
   }, []);
 
   // contador
-//   const timer = () => {
-//   useEffect(() => {
-//     const second = 10000;
+  const timer = () => {
+  useEffect(() => {
+    const second = 10000;
 
-//     const time = setInterval(() => {
-//       setCounter((prevCounter) => (prevCounter > 0 ? prevCounter - 1 : 0));
+    const time = setInterval(() => {
+      setCounter((prevCounter) => (prevCounter > 0 ? prevCounter - 1 : 0));
 
-//       setAllAnswers((prevAllAnswers) => {
-//         if (counter === 0 || showAnswer) {
-//           clearInterval(time);
-//           return true;
-//         }
-//         return prevAllAnswers;
-//       });
-//     }, second);
+      setAllAnswers((prevAllAnswers) => {
+        if (counter === 0 || showAnswer) {
+          clearInterval(time);
+          return true;
+        }
+        return prevAllAnswers;
+      });
+    }, second);
 
-//     return () => clearInterval(time);
-//   }, [counter, showAnswer]);
-// }
+    return () => clearInterval(time);
+  }, [counter, showAnswer]);
+}
 
   // randomiza questoes
   function shuffleArray<T>(array: T[]) {
@@ -94,16 +94,10 @@ function Game() {
     const randomOptions = getRandomOptions(actualQuestion);
     setActualQuestion(actualQuestion);
     setRandomOptions(randomOptions);
-    // timer();
+    useEffect(() => {
+      timer();
+    }, []);
   };
-
-  // function getActualQuestion(questions: Question[]) {
-  //   const actualQuestion = questions[questionIndex];
-  //   const randomOptions = getRandomOptions(actualQuestion);
-  //   setActualQuestion(actualQuestion);
-  //   setRandomOptions(randomOptions);
-  //   // timer();
-  // };
 
   // retorna as questoes certas e erradas
   const getRandomOptions = (question: Question): Options[] => {
@@ -119,7 +113,6 @@ function Game() {
         value: answer,
       })),
     ];
-    // retornando [{...}, {...}, {...}]
     
     return shuffleArray(options);
   };
