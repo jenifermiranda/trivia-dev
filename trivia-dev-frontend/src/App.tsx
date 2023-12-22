@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 // import Game from './pages/Game';
 import GameCopy from './pages/GameCopy';
 import Login from './pages/Login';
+import UserResults from './pages/UserResults';
 
 function App() {
   useEffect(() => {
@@ -13,6 +14,7 @@ function App() {
     <Routes>
       <Route path="/" element={ <Login /> } />
       <Route path="/game" element={ <GameCopy /> } />
+      <Route path="/results" element={ <UserResults /> } />
     </Routes>
   );
 }

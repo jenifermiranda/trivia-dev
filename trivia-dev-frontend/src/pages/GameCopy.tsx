@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import { fetchQuestionsAPI } from '../services/fetchAPI';
 import Question from '../types/Question';
@@ -7,14 +8,18 @@ import Answer from '../types/Answer';
 import Level from '../types/Level';
 
 function GameCopy() {
+  const navigate = useNavigate();
+
   const [questionIndex, setQuestionIndex] = useState(0);
   const [actualQuestion, setActualQuestion] = useState<Question>();
   const [questions, setQuestions] = useState<Question[]>([]);
   const [randomOptions, setRandomOptions] = useState<Options[]>();
-  // const [redirect, setRedirect] = useState(false);
   const [counter, setCounter] = useState<number>(10);
   const [showAnswer, setShowAnswer] = useState<boolean>(false);
   const [allAnswers, setAllAnswers] = useState<boolean>(false);
+  const [userScore, setUserScore] = useState(0);
+  const [errorAPI, setErrorAPI] = useState<boolean>(false);
+  const [timeAnswer, setTimeAnswer] = useState(0);
 
   // embaralha as alternativas
   const shuffleArray = (optionsAnswers: Options[]): Options[] => {
@@ -61,6 +66,7 @@ function GameCopy() {
           getActualQuestion(results);
         }
       } catch (error) {
+        setErrorAPI(true);
         console.log('Erro ao buscar perguntas.', error);
       }
     };
@@ -90,59 +96,71 @@ function GameCopy() {
       const points = 10;
       const level: Record<Level, number> = { easy: 1, medium: 2, hard: 3 };
       const score = points + counter * Number(level[answer.level]);
+      setUserScore(score + userScore);
     }
     setShowAnswer(true);
+    setTimeAnswer(counter);
   };
 
   // funcao do botao PROXIMO
   const handleClick = () => {
+    if (questionIndex === questions.length - 1) {
+      navigate('/results');
+    }
     getActualQuestion(questions);
     setShowAnswer(false);
     setAllAnswers(false);
-    // setActualQuestion(true);
     setCounter(10);
-
-    // getActualQuestion(questions);
   };
 
   return (
     <section>
       <Header />
-      <h2>
-        Tempo:
-        {' '}
-        {counter}
-      </h2>
-      {actualQuestion && (
+      {errorAPI ? <h2>Erro ao buscar perguntas. Tente novamente mais tarde!</h2> : (
         <div>
-          <h2>{actualQuestion.category}</h2>
-          <h3>{actualQuestion.difficulty}</h3>
-          <h3>{actualQuestion.question}</h3>
-          <div>
-            {randomOptions && randomOptions.map((option, index) => {
-              const isRight = option.answer === 'right';
-              const color = showAnswer
-                ? (isRight ? 'green' : 'red')
-                : 'white';
-              return (
-                <button
-                  key={ index }
-                  onClick={ () => updateScore(option) }
-                  style={ { backgroundColor: color } }
-                  disabled={ allAnswers }
-                >
-                  {option.value}
-                </button>
-              );
-            })}
-          </div>
+          <h2>
+            Tempo:
+            {' '}
+            {showAnswer ? timeAnswer : counter}
+          </h2>
+          {actualQuestion && (
+            <div>
+              <h2>{actualQuestion.category}</h2>
+              <h3>{actualQuestion.difficulty}</h3>
+              <h3>{actualQuestion.question}</h3>
+              <div>
+                {randomOptions && randomOptions.map((option, index) => {
+                  const isRight = option.answer === 'right';
+                  let color = 'white';
+                  if (showAnswer) {
+                    color = isRight ? 'green' : 'red';
+                  }
+                  return (
+                    <button
+                      key={ index }
+                      onClick={ () => updateScore(option) }
+                      style={ { backgroundColor: color } }
+                      disabled={ allAnswers }
+                    >
+                      {option.value}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+          <button
+            onClick={ handleClick }
+            disabled={ !allAnswers }
+          >
+            {
+          questionIndex === questions.length - 1
+            ? 'Ver resultados'
+            : 'Próxima'
+        }
+          </button>
         </div>
       )}
-      <button
-        onClick={ handleClick }
-      >
-        Próxima
-      </button>
     </section>
   );
 }
