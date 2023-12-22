@@ -6,7 +6,7 @@ import Options from '../types/Options';
 import Answer from '../types/Answer';
 import Level from '../types/Level';
 
-function Game() {
+function GameCopy() {
   const [questionIndex, setQuestionIndex] = useState(0);
   const [actualQuestion, setActualQuestion] = useState<Question>();
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -16,41 +16,15 @@ function Game() {
   const [showAnswer, setShowAnswer] = useState<boolean>(false);
   const [allAnswers, setAllAnswers] = useState<boolean>(false);
 
-  // faz uma requisição a uma API
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { results } = await fetchQuestionsAPI();
-        if (results.length > 0) {
-          setQuestions(results);
-          setActualQuestion(results[questionIndex]);
-          setRandomOptions(getRandomOptions(results[questionIndex]));
-        }
-      } catch (error) {
-        console.log('Erro ao buscar perguntas.', error);
-      }
-    };
+  // embaralha as alternativas
+  const shuffleArray = (optionsAnswers: Options[]): Options[] => {
+    const NEGATIVE_NUM = -1;
+    const shuffleOptions = optionsAnswers
+      .sort(() => Math.random() + Math.random() * NEGATIVE_NUM);
+    return shuffleOptions;
+  };
 
-    fetchData();
-  }, [questionIndex]);
-
-  // contador
-  //   useEffect(() => {
-  //     const time = setInterval(() => {
-  //       setCounter((prevCounter) => (prevCounter > 0 ? prevCounter - 1 : 0));
-  //       setAllAnswers((prevAllAnswers) => {
-  //         if (counter === 0 || showAnswer) {
-  //           clearInterval(time);
-  //           return true;
-  //         }
-  //         return prevAllAnswers;
-  //       });
-  //     }, 1000);
-
-  //     return () => clearInterval(time);
-  //   }, [counter, showAnswer]);
-
-  // retorna as alternativas certas e erradas
+  // retorna as alternativas certas e erradas ordenadas aleatoriamente
   const getRandomOptions = (question: Question): Options[] => {
     const options: Options[] = [
       {
@@ -68,21 +42,47 @@ function Game() {
     return shuffleArray(options);
   };
 
-  // randomiza questoes
-  function shuffleArray<T>(array: T[]) {
-    const NEGATIVE_NUM = -1;
-    const shuffleOptions = array.sort(() => Math.random() + Math.random() * NEGATIVE_NUM);
-    // retorna o msm array embaralhado
-    return shuffleOptions;
-  }
-
   // atualiza questao
-  const getActualQuestion = (questions: Question[]) => {
-    const currQuestion = questions[questionIndex];
-    const randomOptions = getRandomOptions(currQuestion);
+  const getActualQuestion = (questionsAPI: Question[]) => {
+    const currQuestion = questionsAPI[questionIndex];
+    const newRandomOptions = getRandomOptions(currQuestion);
     setActualQuestion(currQuestion);
-    setRandomOptions(randomOptions);
+    setRandomOptions(newRandomOptions);
+    setQuestionIndex((prevQuestionIndex) => prevQuestionIndex + 1);
   };
+
+  // faz uma requisição a uma API
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { results } = await fetchQuestionsAPI();
+        if (results.length > 0) {
+          setQuestions(results);
+          getActualQuestion(results);
+        }
+      } catch (error) {
+        console.log('Erro ao buscar perguntas.', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // contador
+  useEffect(() => {
+    const time = setInterval(() => {
+      setCounter((prevCounter) => (prevCounter > 0 ? prevCounter - 1 : 0));
+      setAllAnswers((prevAllAnswers) => {
+        if (counter === 0 || showAnswer) {
+          clearInterval(time);
+          return true;
+        }
+        return prevAllAnswers;
+      });
+    }, 1000);
+
+    return () => clearInterval(time);
+  }, [counter, showAnswer]);
 
   // atualiza a pontuacao
   const updateScore = (answer: Answer) => {
@@ -90,15 +90,13 @@ function Game() {
       const points = 10;
       const level: Record<Level, number> = { easy: 1, medium: 2, hard: 3 };
       const score = points + counter * Number(level[answer.level]);
-      console.log(score);
-      // dispatch(updateScore(score));
     }
     setShowAnswer(true);
   };
 
   // funcao do botao PROXIMO
   const handleClick = () => {
-    setQuestionIndex((prevQuestionIndex) => prevQuestionIndex + 1);
+    getActualQuestion(questions);
     setShowAnswer(false);
     setAllAnswers(false);
     // setActualQuestion(true);
@@ -149,4 +147,4 @@ function Game() {
   );
 }
 
-export default Game;
+export default GameCopy;
