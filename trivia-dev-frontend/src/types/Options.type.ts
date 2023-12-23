@@ -1,4 +1,4 @@
-import Level from './Level';
+import Level from './Level.type';
 
 interface Options {
   answer: string;

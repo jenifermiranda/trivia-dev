@@ -1,27 +1,32 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from '../components/Header';
 import { fetchQuestionsAPI } from '../services/fetchAPI';
-import Question from '../types/Question';
-import Options from '../types/Options';
-import Answer from '../types/Answer';
-import Level from '../types/Level';
+import GlobalContext from '../context/GlobalContext';
+import Header from '../components/Header';
+import Question from '../types/Question.type';
+import Options from '../types/Options.type';
+import Answer from '../types/Answer.type';
+import Level from '../types/Level.type';
 
 function GameCopy() {
   const navigate = useNavigate();
 
+  // Estados globais - Aplicação
+  const { userScore, setUserScore } = useContext(GlobalContext);
+  const { questions, setQuestions } = useContext(GlobalContext);
+  const { rightAnswers, setRightAnswers } = useContext(GlobalContext);
+
+  // Estados Locais - Pagina Game
   const [questionIndex, setQuestionIndex] = useState(0);
   const [actualQuestion, setActualQuestion] = useState<Question>();
-  const [questions, setQuestions] = useState<Question[]>([]);
   const [randomOptions, setRandomOptions] = useState<Options[]>();
   const [counter, setCounter] = useState<number>(10);
   const [showAnswer, setShowAnswer] = useState<boolean>(false);
   const [allAnswers, setAllAnswers] = useState<boolean>(false);
-  const [userScore, setUserScore] = useState(0);
   const [errorAPI, setErrorAPI] = useState<boolean>(false);
   const [timeAnswer, setTimeAnswer] = useState(0);
 
-  // embaralha as alternativas
+  // Embaralha as alternativas
   const shuffleArray = (optionsAnswers: Options[]): Options[] => {
     const NEGATIVE_NUM = -1;
     const shuffleOptions = optionsAnswers
@@ -29,7 +34,7 @@ function GameCopy() {
     return shuffleOptions;
   };
 
-  // retorna as alternativas certas e erradas ordenadas aleatoriamente
+  // Retorna as alternativas certas e erradas ordenadas aleatoriamente
   const getRandomOptions = (question: Question): Options[] => {
     const options: Options[] = [
       {
@@ -47,7 +52,7 @@ function GameCopy() {
     return shuffleArray(options);
   };
 
-  // atualiza questao
+  // Atualiza questao
   const getActualQuestion = (questionsAPI: Question[]) => {
     const currQuestion = questionsAPI[questionIndex];
     const newRandomOptions = getRandomOptions(currQuestion);
@@ -56,7 +61,7 @@ function GameCopy() {
     setQuestionIndex((prevQuestionIndex) => prevQuestionIndex + 1);
   };
 
-  // faz uma requisição a uma API
+  // Executa requisição a API
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -74,7 +79,7 @@ function GameCopy() {
     fetchData();
   }, []);
 
-  // contador
+  // Temporizador - 10s
   useEffect(() => {
     const time = setInterval(() => {
       setCounter((prevCounter) => (prevCounter > 0 ? prevCounter - 1 : 0));
@@ -90,19 +95,20 @@ function GameCopy() {
     return () => clearInterval(time);
   }, [counter, showAnswer]);
 
-  // atualiza a pontuacao
+  // Atualiza a pontuacao
   const updateScore = (answer: Answer) => {
     if (answer.answer === 'right') {
       const points = 10;
       const level: Record<Level, number> = { easy: 1, medium: 2, hard: 3 };
       const score = points + counter * Number(level[answer.level]);
       setUserScore(score + userScore);
+      setRightAnswers((prevRightAnswers) => [...prevRightAnswers, answer]);
     }
     setShowAnswer(true);
     setTimeAnswer(counter);
   };
 
-  // funcao do botao PROXIMO
+  // Função do botao PROXIMO
   const handleClick = () => {
     if (questionIndex === questions.length - 1) {
       navigate('/results');
@@ -125,6 +131,11 @@ function GameCopy() {
           </h2>
           {actualQuestion && (
             <div>
+              <h2>
+                Questão:
+                {' '}
+                {questionIndex}
+              </h2>
               <h2>{actualQuestion.category}</h2>
               <h3>{actualQuestion.difficulty}</h3>
               <h3>{actualQuestion.question}</h3>

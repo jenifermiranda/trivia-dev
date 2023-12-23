@@ -1,18 +1,16 @@
 // Tela de Login
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import GlobalContext from '../context/GlobalContext';
 
 function Login() {
   const navigate = useNavigate();
 
-  const [formLogin, setformLogin] = useState({
-    name: '',
-    email: '',
-  });
+  const { formLogin, setformLogin } = useContext(GlobalContext);
 
-  const [warning, setWarning] = useState('');
-  const [warningName, setWarningName] = useState('');
-  const [warningEmail, setWarningEmail] = useState('');
+  const [warning, setWarning] = useState<string>('');
+  const [warningName, setWarningName] = useState<string>('');
+  const [warningEmail, setWarningEmail] = useState<string>('');
 
   function handleChange(
     event: React.ChangeEvent<

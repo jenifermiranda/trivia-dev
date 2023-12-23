@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import { fetchQuestionsAPI } from '../services/fetchAPI';
-import Question from '../types/Question';
-import Options from '../types/Options';
-import Answer from '../types/Answer';
-import Level from '../types/Level';
+import Question from '../types/Question.type';
+import Options from '../types/Options.type';
+import Answer from '../types/Answer.type';
+import Level from '../types/Level.type';
 
 function Game() {
   const [questionIndex, setQuestionIndex] = useState(0);
