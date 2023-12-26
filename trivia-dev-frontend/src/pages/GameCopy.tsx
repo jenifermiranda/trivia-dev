@@ -14,13 +14,14 @@ function GameCopy() {
   // Estados globais - Aplicação
   const { userScore, setUserScore } = useContext(GlobalContext);
   const { questions, setQuestions } = useContext(GlobalContext);
+  const { allQuestions, setAllQuestions } = useContext(GlobalContext);
   const { rightAnswers, setRightAnswers } = useContext(GlobalContext);
 
   // Estados Locais - Pagina Game
   const [questionIndex, setQuestionIndex] = useState(0);
   const [actualQuestion, setActualQuestion] = useState<Question>();
   const [randomOptions, setRandomOptions] = useState<Options[]>();
-  const [counter, setCounter] = useState<number>(10);
+  const [counter, setCounter] = useState<number>(30);
   const [showAnswer, setShowAnswer] = useState<boolean>(false);
   const [allAnswers, setAllAnswers] = useState<boolean>(false);
   const [errorAPI, setErrorAPI] = useState<boolean>(false);
@@ -67,6 +68,8 @@ function GameCopy() {
       try {
         const { results } = await fetchQuestionsAPI();
         if (results.length > 0) {
+          setAllQuestions((prevAllQuestions) => [...prevAllQuestions,
+            ...results.slice(0, (results.length - 1))]);
           setQuestions(results);
           getActualQuestion(results);
         }
@@ -116,7 +119,7 @@ function GameCopy() {
     getActualQuestion(questions);
     setShowAnswer(false);
     setAllAnswers(false);
-    setCounter(10);
+    setCounter(30);
   };
 
   return (

@@ -8,6 +8,7 @@ import Answer from '../types/Answer.type';
 function GlobalProvider({ children }: GlobalProviderProps) {
   const [userScore, setUserScore] = useState(0);
   const [questions, setQuestions] = useState<Question[]>([]);
+  const [allQuestions, setAllQuestions] = useState<Question[]>([]);
   const [rightAnswers, setRightAnswers] = useState<Answer[]>([]);
   const [formLogin, setformLogin] = useState<FormLogin>({
     name: '',
@@ -21,6 +22,8 @@ function GlobalProvider({ children }: GlobalProviderProps) {
         setUserScore,
         questions,
         setQuestions,
+        allQuestions,
+        setAllQuestions,
         rightAnswers,
         setRightAnswers,
         formLogin,

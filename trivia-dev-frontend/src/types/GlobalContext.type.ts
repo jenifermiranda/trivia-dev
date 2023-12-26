@@ -8,6 +8,8 @@ export type GlobalContextType = {
   setUserScore: Dispatch<SetStateAction<number>>;
   questions: Question[];
   setQuestions: Dispatch<SetStateAction<Question[]>>;
+  allQuestions: Question[];
+  setAllQuestions: Dispatch<SetStateAction<Question[]>>;
   rightAnswers: Answer[];
   setRightAnswers: Dispatch<SetStateAction<Answer[]>>;
   formLogin: FormLogin;

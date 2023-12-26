@@ -1,19 +1,30 @@
 // Tela de Resultados do Usuário
 import { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import GlobalContext from '../context/GlobalContext';
 import Question from '../types/Question.type';
 
 function UserResults() {
-  const { userScore, formLogin, questions, rightAnswers } = useContext(GlobalContext);
+  const navigate = useNavigate();
+
+  const { userScore,
+    formLogin,
+    questions,
+    rightAnswers,
+    allQuestions } = useContext(GlobalContext);
 
   const [wrongAnswers, setWrongAnswers] = useState<Question[]>([]);
 
   useEffect(() => {
-    const wrongs = questions.filter((question) => rightAnswers
+    const wrongs = allQuestions.filter((question) => rightAnswers
       .every((answer) => answer.value !== question.correct_answer));
 
     setWrongAnswers(wrongs);
   }, []);
+
+  function handleSubmit() {
+    navigate('/game');
+  }
 
   return (
     <section>
@@ -30,7 +41,7 @@ function UserResults() {
       <h3>
         Porcentagem de acertos:
         {' '}
-        {(rightAnswers.length / (questions.length - 1)) * 100}
+        {(rightAnswers.length / (allQuestions.length)) * 100}
         %
       </h3>
       <h3>
@@ -41,6 +52,9 @@ function UserResults() {
       {wrongAnswers.map((question, index) => (
         <div key={ index }>
           <h4>
+            {question.category}
+          </h4>
+          <h4>
             {question.question}
           </h4>
           <h5>
@@ -50,6 +64,14 @@ function UserResults() {
           </h5>
         </div>
       ))}
+      <button
+        id="playAgain"
+        type="button"
+        name="Play Again"
+        onClick={ handleSubmit }
+      >
+        Play Again
+      </button>
     </section>
   );
 }
