@@ -10,6 +10,7 @@ function GlobalProvider({ children }: GlobalProviderProps) {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [allQuestions, setAllQuestions] = useState<Question[]>([]);
   const [rightAnswers, setRightAnswers] = useState<Answer[]>([]);
+  const [wrongAnswers, setWrongAnswers] = useState<Question[]>([]);
   const [formLogin, setformLogin] = useState<FormLogin>({
     name: '',
     email: '',
@@ -26,6 +27,8 @@ function GlobalProvider({ children }: GlobalProviderProps) {
         setAllQuestions,
         rightAnswers,
         setRightAnswers,
+        wrongAnswers,
+        setWrongAnswers,
         formLogin,
         setformLogin,
       } }

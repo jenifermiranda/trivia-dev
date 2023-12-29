@@ -12,9 +12,9 @@ function UserResults() {
     formLogin,
     questions,
     rightAnswers,
+    wrongAnswers,
+    setWrongAnswers,
     allQuestions } = useContext(GlobalContext);
-
-  const [wrongAnswers, setWrongAnswers] = useState<Question[]>([]);
 
   useEffect(() => {
     const wrongs = allQuestions.filter((question) => rightAnswers

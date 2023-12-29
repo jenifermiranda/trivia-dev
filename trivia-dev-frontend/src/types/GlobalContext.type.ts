@@ -12,6 +12,8 @@ export type GlobalContextType = {
   setAllQuestions: Dispatch<SetStateAction<Question[]>>;
   rightAnswers: Answer[];
   setRightAnswers: Dispatch<SetStateAction<Answer[]>>;
+  wrongAnswers: Question[];
+  setWrongAnswers: Dispatch<SetStateAction<Question[]>>;
   formLogin: FormLogin;
   setformLogin: Dispatch<SetStateAction<FormLogin>>;
 };
