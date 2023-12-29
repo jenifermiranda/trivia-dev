@@ -42,13 +42,12 @@ function UserResults() {
       <h3>
         Porcentagem de acertos:
         {' '}
-        {(rightAnswers.length / (allQuestions.length)) * 100}
+        {((rightAnswers.length / (allQuestions.length)) * 100).toFixed(2)}
         %
       </h3>
       <h3>
         Questões que foram respondidas incorretamente:
         <br />
-        Dica!!! Foque nesses assuntos para melhorar seu desempenho!
       </h3>
       {wrongAnswers.map((question, index) => (
         <div key={ index }>
@@ -65,6 +64,8 @@ function UserResults() {
           </h5>
         </div>
       ))}
+      <Chart />
+      <h3>Foque nesses assuntos para melhorar seu desempenho!</h3>
       <button
         id="playAgain"
         type="button"
@@ -73,7 +74,6 @@ function UserResults() {
       >
         Play Again
       </button>
-      <Chart />
     </section>
   );
 }
