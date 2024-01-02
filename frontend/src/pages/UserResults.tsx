@@ -3,14 +3,12 @@ import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Chart from '../components/Chart';
 import GlobalContext from '../context/GlobalContext';
-import Question from '../types/Question.type';
 
 function UserResults() {
   const navigate = useNavigate();
 
   const { userScore,
     formLogin,
-    questions,
     rightAnswers,
     wrongAnswers,
     setWrongAnswers,
