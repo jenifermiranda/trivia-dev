@@ -7,7 +7,7 @@ export type IncorrectAnswerInputtableFields = Optional<IncorrectAnswer, 'id'>
 
 type IncorrectAnswerSequelizeModelCreator = ModelDefined<IncorrectAnswer, IncorrectAnswerInputtableFields>;
 
-export type QuastionSequelizeModel = Model<IncorrectAnswer, IncorrectAnswerInputtableFields>;
+export type IncorrectAnswerSequelizeModel = Model<IncorrectAnswer, IncorrectAnswerInputtableFields>;
 
 const IncorrectAnswerModel: IncorrectAnswerSequelizeModelCreator = db.define('IncorrectAnswer', { 
   id: {
@@ -29,7 +29,7 @@ const IncorrectAnswerModel: IncorrectAnswerSequelizeModelCreator = db.define('In
   underscored: true,
 });
 
+export default IncorrectAnswerModel;
+
 QuestionModel.hasMany(IncorrectAnswerModel, { foreignKey: 'question_id' });
 IncorrectAnswerModel.belongsTo(QuestionModel, { foreignKey: 'question_id' });
-
-export default IncorrectAnswerModel;

@@ -25,7 +25,19 @@ export default {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-            incorrect_answers_id: {
+            incorrect_answers_id_a: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+            },
+            incorrect_answers_id_b: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+            },
+            incorrect_answers_id_c: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+            },
+            incorrect_answers_id_d: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },

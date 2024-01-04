@@ -1,10 +1,11 @@
 {
   "scripts": {
-    "db:reset": "npx -y tsc && npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed"
+    "db:reset": "npx -y tsc && npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
   },
   "dependencies": {
     "@types/sequelize": "4.28",
     "express": "4.17.1",
+    "nodemon": "^3.0.2",
     "sequelize": "^6.25.5"
   },
   "devDependencies": {

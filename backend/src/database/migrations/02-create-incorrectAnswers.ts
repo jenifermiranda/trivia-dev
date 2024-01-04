@@ -12,6 +12,12 @@ export default {
             question_id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
+                references: {
+                    model: 'questions',
+                    key: 'id',
+                },
+                onUpdate: 'CASCADE',
+                onDelete: 'CASCADE',
             },
             incorrect_answer: {
                 type: DataTypes.STRING,
