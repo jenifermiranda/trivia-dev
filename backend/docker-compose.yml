@@ -7,15 +7,15 @@ services:
     ports:
       - 3001:3001 # porta padrão da aplicação
       - 9229:9229 # porta para debugging
-    command: run dev # roda aplicação com nodemon
+    command: npm run dev # roda aplicação com nodemon
     volumes:
       # vincula pasta local com a dentro do container
       - ./:/app
     environment:
-      MYSQL_USER: root
-      MYSQL_PASSWORD: senha_mysql
-      MYSQL_HOSTNAME: db
-      MYSQL_PORT: 3306
+      DB_USER: root
+      DB_PASS: senha_mysql
+      DB_HOST: db
+      DB_PORT: 3306
       PORT: 3001
     depends_on:
       db:
