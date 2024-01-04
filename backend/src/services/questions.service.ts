@@ -19,8 +19,8 @@ import { Question } from '../types/Question';
 //     }
 // }
 
-async function getAllQuestions() {
-    return await QuestionModel.findAll();
+export async function getAllQuestions() {
+  return await QuestionModel.findAll();
 }
 
 console.log(getAllQuestions());

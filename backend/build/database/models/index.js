@@ -19,7 +19,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var sequelize_1 = require("sequelize");
-var config = __importStar(require("../config/database"));
-var db = new sequelize_1.Sequelize(config);
+const sequelize_1 = require("sequelize");
+const config = __importStar(require("../config/database"));
+const db = new sequelize_1.Sequelize(config);
 exports.default = db;

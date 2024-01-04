@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var sequelize_1 = require("sequelize");
+const sequelize_1 = require("sequelize");
 exports.default = {
-    up: function (queryInterface) {
+    up(queryInterface) {
         return queryInterface.createTable('incorrect_answers', {
             id: {
                 type: sequelize_1.DataTypes.INTEGER,
@@ -25,7 +25,7 @@ exports.default = {
             },
         });
     },
-    down: function (queryInterface) {
+    down(queryInterface) {
         return queryInterface.dropTable('incorrect_answers');
     }
 };
