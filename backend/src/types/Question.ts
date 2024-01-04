@@ -4,8 +4,8 @@ export type Question = {
     category: string;
     question: string;
     correct_answer: string;
-    incorrect_answers_id_a: number;
-    incorrect_answers_id_b: number;
-    incorrect_answers_id_c: number;
-    incorrect_answers_id_d: number;
+    incorrect_answers_a: string;
+    incorrect_answers_b: string;
+    incorrect_answers_c: string;
+    incorrect_answers_d: string;
 };

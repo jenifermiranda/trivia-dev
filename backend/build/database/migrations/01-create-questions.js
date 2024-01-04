@@ -25,20 +25,20 @@ exports.default = {
                 type: sequelize_1.DataTypes.STRING,
                 allowNull: false,
             },
-            incorrect_answers_id_a: {
-                type: sequelize_1.DataTypes.INTEGER,
+            incorrect_answers_a: {
+                type: sequelize_1.DataTypes.STRING,
                 allowNull: false,
             },
-            incorrect_answers_id_b: {
-                type: sequelize_1.DataTypes.INTEGER,
+            incorrect_answers_b: {
+                type: sequelize_1.DataTypes.STRING,
                 allowNull: false,
             },
-            incorrect_answers_id_c: {
-                type: sequelize_1.DataTypes.INTEGER,
+            incorrect_answers_c: {
+                type: sequelize_1.DataTypes.STRING,
                 allowNull: false,
             },
-            incorrect_answers_id_d: {
-                type: sequelize_1.DataTypes.INTEGER,
+            incorrect_answers_d: {
+                type: sequelize_1.DataTypes.STRING,
                 allowNull: false,
             },
         });

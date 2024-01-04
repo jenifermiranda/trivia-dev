@@ -25,24 +25,24 @@ export default {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-            incorrect_answers_id_a: {
-                type: DataTypes.INTEGER,
+            incorrect_answers_a: {
+                type: DataTypes.STRING,
                 allowNull: false,
             },
-            incorrect_answers_id_b: {
-                type: DataTypes.INTEGER,
+            incorrect_answers_b: {
+                type: DataTypes.STRING,
                 allowNull: false,
             },
-            incorrect_answers_id_c: {
-                type: DataTypes.INTEGER,
+            incorrect_answers_c: {
+                type: DataTypes.STRING,
                 allowNull: false,
             },
-            incorrect_answers_id_d: {
-                type: DataTypes.INTEGER,
+            incorrect_answers_d: {
+                type: DataTypes.STRING,
                 allowNull: false,
             },
         })
-    }, 
+    },
     down(queryInterface: QueryInterface) {
         return queryInterface.dropTable('questions')
     }
