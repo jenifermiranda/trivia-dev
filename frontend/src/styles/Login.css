@@ -8,54 +8,79 @@ body {
     background-repeat: no-repeat;
 }
 
+
+
 .box-branco {
     background-color: white;
-    border: 1px solid red;
     width: 735px;
     height: 398px;
-    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     border-radius: 10px;
     padding: 10px;
     margin-top: 486px;
     margin-left: 593px;
-    box-shadow: 1px 4px 13px 2px rgba(0, 0, 0, 0.20);
+    box-shadow: 1.198px 4.79px 15.568px 2.395px rgba(0, 0, 0, 0.20);
 }
 
-.box-name {
-    width: 650px;
+input {
+    width: 621.541px;
+    height: 49.74px;
+    border: 1.198px solid #E1E5EB;
+    border-radius: 10px;
+    padding: 0px 20px;
+    font-size: 14px;
+    display: flex;
+}
+
+.box-inputs {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 200px;
+    margin-top: 40px;
+}
+
+/* .box-name {
+    width: 50px;
     height: 49.74px;
     flex-shrink: 0;
-    border-radius: 10px;
     padding: 14.37px;
     border: 10px solid yellow;
     margin-top: 941.48px;
-    margin-left: 250px;
-}
+    margin-bottom: 300px;
+    margin-left: 40px;
+} */
 
-.box-email {
-    width: 650px;
+/* .box-email {
+    width: 50px;
     height: 49.74px;
     flex-shrink: 0;
-    border-radius: 10px;
-    padding: 14.37px;
-    border: 5px solid greenyellow;
-    margin-top: 969.58px;
-    margin-left: 250px;
-}
+    border: 1.198px solid #E1E5EB;
+    margin-top: 941.48px;
+    margin-left: 40px;
+} */
 
 .btnPlay {
-    border: 10px solid blue;
-    width: 650px;
+    width: 663.541px;
     height: 49.74px;
     flex-shrink: 0;
+    border: none;
     border-radius: 10px;
+    box-shadow: 0px 4.79px 4.79px 0px rgba(0, 0, 0, 0.25);
     background-color: rgb(47, 193, 140);
     color: white;
-    padding: 14.37px 10px;
-    margin-top: 230px;
-    margin-left: 45px;
-    font-size: 20px;
-    display: flex;
-    align-items: center;
-    align-content: space-around;
+    font-size: 20px; 
+    /* margin-top: 230px; */
+    /* margin-left: 45px; */
+    /* line-height: 20px; */
+    /* align-items: center; */
+}
+
+.logo {
+    border: 10px solid red;
+    width: 200px;
+    height: 200px;
+    background-image: url("/src/images/logo.png");
 }

@@ -49,9 +49,10 @@ function Login() {
   }
 
   return (
-    <div>
-      <form>
-        <div className="box-branco">
+    <form>
+      <img src="/src/images/logo_trivia-dev.png" alt="logo" className="logo" />
+      <div className="box-branco">
+        <div className="box-inputs">
           <label htmlFor="name" className="box-name">
             <input
               id="name"
@@ -60,7 +61,6 @@ function Login() {
               onChange={ handleChange }
               placeholder="Qual é o seu nome?"
             />
-            <br />
           </label>
           {(warningName && formLogin.name.length < 3) && <p>{warningName}</p>}
           {/* Renderiza o estado a partir de sua leitura contínua -> some o warning quando o usuário cumpre os requisitos do input */}
@@ -74,7 +74,6 @@ function Login() {
             />
           </label>
           {(warningEmail && !emailRegexTest(formLogin.email)) && <p>{warningEmail}</p>}
-          <br />
           {(warning
             && formLogin.name.length === 0
             && formLogin.email.length === 0)
@@ -89,8 +88,8 @@ function Login() {
             Play
           </button>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
   );
 }
 
