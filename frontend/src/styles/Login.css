@@ -1,0 +1,61 @@
+body {
+    margin: 0;
+    padding: 0;
+    width: 1920px;
+    height: 1080px;
+    flex-shrink: 0;
+    background-image: url("/src/images/question-pattern.png");
+    background-repeat: no-repeat;
+}
+
+.box-branco {
+    background-color: white;
+    border: 1px solid red;
+    width: 735px;
+    height: 398px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 486px;
+    margin-left: 593px;
+    box-shadow: 1px 4px 13px 2px rgba(0, 0, 0, 0.20);
+}
+
+.box-name {
+    width: 650px;
+    height: 49.74px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    padding: 14.37px;
+    border: 10px solid yellow;
+    margin-top: 941.48px;
+    margin-left: 250px;
+}
+
+.box-email {
+    width: 650px;
+    height: 49.74px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    padding: 14.37px;
+    border: 5px solid greenyellow;
+    margin-top: 969.58px;
+    margin-left: 250px;
+}
+
+.btnPlay {
+    border: 10px solid blue;
+    width: 650px;
+    height: 49.74px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background-color: rgb(47, 193, 140);
+    color: white;
+    padding: 14.37px 10px;
+    margin-top: 230px;
+    margin-left: 45px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    align-content: space-around;
+}
