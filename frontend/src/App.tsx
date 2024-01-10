@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Login from './pages/Login';
 import UserResults from './pages/UserResults';
@@ -6,9 +6,9 @@ import GlobalProvider from './context/GlobalProvider';
 import Game from './pages/Game';
 
 function App() {
-  useEffect(() => {
-    document.title = 'Trivia DEV';
-  }, []);
+  // useEffect(() => {
+  //   document.title = 'Trivia DEV';
+  // }, []);
 
   return (
     <GlobalProvider>

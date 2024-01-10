@@ -18,6 +18,8 @@ async function getAllQuestions() {
           ),
           'incorrect_answers',
         ],
+        // ----------
+        // [Sequelize.fn('ARRAY', Sequelize.literal('ARRAY[incorrect_answers_a, incorrect_answers_b, incorrect_answers_c, incorrect_answers_d]')), 'incorrect_answers'],
       ],
   });
   return questions;

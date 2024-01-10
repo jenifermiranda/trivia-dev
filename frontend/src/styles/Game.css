@@ -1,0 +1,105 @@
+.game-page-and-header {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    width: auto;
+    height: auto;
+    flex-shrink: 0;
+    /* background-image: url("/src/images/question-pattern.png");
+    background-repeat: no-repeat; */
+    /* border: 5px solid red; */
+}
+
+/* .game-page-only {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    border: 5px solid red;
+} */
+
+.game-page {
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    /* border: 5px solid red; */
+}
+
+.question-and-answers {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    /* border: 5px solid red; */
+}
+
+.question-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 1.198px 4.79px 15.568px 2.395px rgba(0, 0, 0, 0.20);
+    /* border: 5px solid red; */
+}
+
+.answers-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* border: 5px solid red; */
+    gap: 20px;
+}
+
+.category {
+    width: 663.541px;
+    height: 49.74px;
+    flex-shrink: 0;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0px 4.79px 4.79px 0px rgba(0, 0, 0, 0.25);
+    background-color: rgb(0, 213, 226);
+    border-radius: 25px;
+    border-color: 2px solid red;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.button-answer {
+    width: 663.541px;
+    height: 49.74px;
+    flex-shrink: 0;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0px 4.79px 4.79px 0px rgba(0, 0, 0, 0.25);
+    background-color: white;
+    border-radius: 25px;
+    border-color: 2px solid red;
+    color: rgb(60, 27, 122);
+    font-size: 20px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.button-next {
+    width: 663.541px;
+    height: 49.74px;
+    flex-shrink: 0;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0px 4.79px 4.79px 0px rgba(0, 0, 0, 0.25);
+    background-color: rgb(60, 27, 122);
+    color: rgb(47, 193, 140);
+    font-size: 20px;
+    font-weight: bold;
+    font-style: italic;
+}
+

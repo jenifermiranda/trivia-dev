@@ -7,6 +7,8 @@ import Question from '../types/Question.type';
 import Options from '../types/Options.type';
 import Answer from '../types/Answer.type';
 import Level from '../types/Level.type';
+import '../styles/Game.css';
+import Footer from '../components/Footer';
 
 function Game() {
   const navigate = useNavigate();
@@ -66,7 +68,8 @@ function Game() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { results } = await fetchQuestionsAPI();
+        const results = await fetchQuestionsAPI();
+        console.log(results);
         if (results.length > 0) {
           setAllQuestions((prevAllQuestions) => [...prevAllQuestions,
             ...results.slice(0, (results.length - 1))]);
@@ -123,58 +126,76 @@ function Game() {
   };
 
   return (
-    <section>
+    <section className="game-page-and-header">
       <Header />
-      {errorAPI ? <h2>Erro ao buscar perguntas. Tente novamente mais tarde!</h2> : (
-        <div>
-          <h2>
-            Tempo:
-            {' '}
-            {showAnswer ? timeAnswer : counter}
-          </h2>
-          {actualQuestion && (
-            <div>
-              <h2>
-                Questão:
-                {' '}
-                {questionIndex}
-              </h2>
-              <h2>{actualQuestion.category}</h2>
-              <h3>{actualQuestion.difficulty}</h3>
-              <h3>{actualQuestion.question}</h3>
-              <div>
-                {randomOptions && randomOptions.map((option, index) => {
-                  const isRight = option.answer === 'right';
-                  let color = 'white';
-                  if (showAnswer) {
-                    color = isRight ? 'green' : 'red';
+      <div className="game-page-only">
+        {errorAPI ? <h2>Erro ao buscar perguntas. Tente novamente mais tarde!</h2> : (
+          <div className="game-page">
+            {actualQuestion && (
+              <div className="question-and-answers">
+                <div className="question-side">
+                  <img
+                    src="/src/images/logo_trivia-dev.png"
+                    alt="logo"
+                    className="logo"
+                  />
+                  <h2 className="category">{actualQuestion.category}</h2>
+                  {/* <h2>
+                    Questão:
+                    {' '}
+                    {questionIndex}
+                  </h2> */}
+                  <h3>{actualQuestion.difficulty}</h3>
+                  <h1>
+                    Questão:
+                    {' '}
+                    {questionIndex}
+                    {' '}
+                    {actualQuestion.question}
+                  </h1>
+                  <h2>
+                    Tempo:
+                    {' '}
+                    {showAnswer ? timeAnswer : counter}
+                  </h2>
+                </div>
+                <div className="answers-side">
+                  {randomOptions && randomOptions.map((option, index) => {
+                    const isRight = option.answer === 'right';
+                    let color = 'white';
+                    if (showAnswer) {
+                      color = isRight ? 'green' : 'red';
+                    }
+                    return (
+                      <button
+                        className="button-answer"
+                        key={ index }
+                        onClick={ () => updateScore(option) }
+                        style={ { backgroundColor: color } }
+                        disabled={ allAnswers }
+                      >
+                        {option.value}
+                      </button>
+                    );
+                  })}
+                  <button
+                    className="button-next"
+                    onClick={ handleClick }
+                    disabled={ !allAnswers }
+                  >
+                    {
+                    questionIndex === questions.length - 1
+                      ? 'Ver resultados'
+                      : 'Próxima'
                   }
-                  return (
-                    <button
-                      key={ index }
-                      onClick={ () => updateScore(option) }
-                      style={ { backgroundColor: color } }
-                      disabled={ allAnswers }
-                    >
-                      {option.value}
-                    </button>
-                  );
-                })}
+                  </button>
+                </div>
               </div>
-            </div>
-          )}
-          <button
-            onClick={ handleClick }
-            disabled={ !allAnswers }
-          >
-            {
-          questionIndex === questions.length - 1
-            ? 'Ver resultados'
-            : 'Próxima'
-        }
-          </button>
-        </div>
-      )}
+            )}
+          </div>
+        )}
+      </div>
+      <Footer />
     </section>
   );
 }

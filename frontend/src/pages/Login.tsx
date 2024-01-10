@@ -2,6 +2,7 @@
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import GlobalContext from '../context/GlobalContext';
+import Footer from '../components/Footer';
 import '../styles/Login.css';
 
 function Login() {
@@ -49,47 +50,48 @@ function Login() {
   }
 
   return (
-    <form>
-      <img src="/src/images/logo_trivia-dev.png" alt="logo" className="logo" />
-      <div className="box-branco">
-        <div className="box-inputs">
-          <label htmlFor="name" className="box-name">
+    <section className="all-login-page">
+      <form>
+        <img src="/src/images/logo_trivia-dev.png" alt="logo" className="logo" />
+        <div className="box-branco">
+          <div className="box-inputs">
             <input
               id="name"
               name="name"
+              // className="box-name"
               value={ formLogin.name }
               onChange={ handleChange }
               placeholder="Qual é o seu nome?"
             />
-          </label>
-          {(warningName && formLogin.name.length < 3) && <p>{warningName}</p>}
-          {/* Renderiza o estado a partir de sua leitura contínua -> some o warning quando o usuário cumpre os requisitos do input */}
-          <label htmlFor="email" className="box-email">
+            {(warningName && formLogin.name.length < 3) && <p>{warningName}</p>}
+            {/* Renderiza o estado a partir de sua leitura contínua -> some o warning quando o usuário cumpre os requisitos do input */}
             <input
               id="email"
               name="email"
+              // className="box-email"
               value={ formLogin.email }
               onChange={ handleChange }
               placeholder="Qual é o seu e-mail?"
             />
-          </label>
-          {(warningEmail && !emailRegexTest(formLogin.email)) && <p>{warningEmail}</p>}
-          {(warning
-            && formLogin.name.length === 0
-            && formLogin.email.length === 0)
-            && <p>{warning}</p>}
-          <button
-            className="btnPlay"
-            id="btnPlay"
-            type="button"
-            name="btnPlay"
-            onClick={ handleSubmit }
-          >
-            Play
-          </button>
+            {(warningEmail && !emailRegexTest(formLogin.email)) && <p>{warningEmail}</p>}
+            {(warning
+              && formLogin.name.length === 0
+              && formLogin.email.length === 0)
+              && <p>{warning}</p>}
+            <button
+              className="btnPlay"
+              id="btnPlay"
+              type="button"
+              name="btnPlay"
+              onClick={ handleSubmit }
+            >
+              PLAY
+            </button>
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+      <Footer />
+    </section>
   );
 }
 

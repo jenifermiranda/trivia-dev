@@ -1,14 +1,51 @@
-body {
+/* body {
     margin: 0;
     padding: 0;
-    width: 1920px;
-    height: 1080px;
+    display: flex;
+    justify-content: center;
+    width: auto;
+    height: auto;
     flex-shrink: 0;
     background-image: url("/src/images/question-pattern.png");
     background-repeat: no-repeat;
 }
 
+.all-login-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+} */
 
+html {
+    min-height: 100%;
+    background-image: url("/src/images/question-pattern-1.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.all-login-page {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: auto;
+    height: auto;
+    flex-shrink: 0;
+    /* border: 5px solid red; */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: space-between;
+    margin-top: 180px;
+    gap: 20px;
+    /* border: 5px solid red; */
+}
 
 .box-branco {
     background-color: white;
@@ -19,8 +56,6 @@ body {
     align-items: center;
     border-radius: 10px;
     padding: 10px;
-    margin-top: 486px;
-    margin-left: 593px;
     box-shadow: 1.198px 4.79px 15.568px 2.395px rgba(0, 0, 0, 0.20);
 }
 
@@ -70,8 +105,10 @@ input {
     border-radius: 10px;
     box-shadow: 0px 4.79px 4.79px 0px rgba(0, 0, 0, 0.25);
     background-color: rgb(47, 193, 140);
-    color: white;
+    color: rgb(60, 27, 122);;
     font-size: 20px; 
+    font-weight: bold;
+    font-style: italic;
     /* margin-top: 230px; */
     /* margin-left: 45px; */
     /* line-height: 20px; */
@@ -79,8 +116,7 @@ input {
 }
 
 .logo {
-    border: 10px solid red;
+    /* border: 5px solid red; */
     width: 200px;
     height: 200px;
-    background-image: url("/src/images/logo.png");
 }
