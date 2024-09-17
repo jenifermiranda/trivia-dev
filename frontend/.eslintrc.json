@@ -1,0 +1,7 @@
+{
+    "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "/home/matheus/Documentos/projetos/trivia-dev-3/trivia-dev/frontend/tsconfig.json"
+  },
+    "extends": "@trybe/eslint-config-frontend/typescript"
+}
